@@ -1,0 +1,11 @@
+{
+  "name": "nonnas-blanket",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Progress tracker for Nonna's hexagon blanket of Italy.",
+  "scripts": {
+    "start": "npx --yes serve -l 5173 .",
+    "add-stage": "node tools/add-stage.mjs"
+  }
+}

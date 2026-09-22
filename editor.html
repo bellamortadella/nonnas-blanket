@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nonna's blanket — grid editor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,300;6..72,400&family=Unbounded:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<style>
+  body{overflow:auto}
+  #ed{display:grid;grid-template-columns:1fr 20rem;height:100vh}
+  #edCanvasWrap{position:relative;overflow:hidden}
+  #edCanvas{display:block;width:100%;height:100%;cursor:crosshair;touch-action:none}
+  #side{
+    border-left:1px solid var(--line);
+    background:#0a0c10;
+    overflow-y:auto;
+    padding:1rem 1rem 3rem;
+  }
+  h1{font-family:Unbounded,system-ui,sans-serif;font-weight:300;font-size:1.05rem;margin:0 0 .2rem}
+  .lede{color:var(--grey-dim);font-size:.8rem;line-height:1.5;margin:0 0 .9rem}
+  .lede a{color:var(--grey)}
+  .tools{display:flex;flex-wrap:wrap;gap:.35rem;margin-bottom:.9rem}
+  .tools button{
+    font:inherit;font-size:.8rem;color:var(--grey);background:#12151b;
+    border:1px solid var(--line);border-radius:5px;padding:.34rem .6rem;cursor:pointer;
+  }
+  .tools button:hover{color:var(--ink)}
+  .tools button[disabled]{opacity:.4;cursor:default}
+  table{width:100%;border-collapse:collapse;font-size:.78rem}
+  th{
+    text-align:left;color:var(--grey-dim);font-weight:400;
+    border-bottom:1px solid var(--line);padding:.3rem .25rem;
+    position:sticky;top:0;background:#0a0c10;
+  }
+  th.n,td.n{text-align:right;font-variant-numeric:tabular-nums}
+  td{padding:.26rem .25rem;border-bottom:1px solid #15191f}
+  tr.sel td{background:#161b22}
+  tr[data-id]{cursor:pointer}
+  tr[data-id]:hover td{background:#12161c}
+  .sw{display:inline-block;width:.62rem;height:.62rem;border-radius:2px;margin-right:.45rem;vertical-align:.01rem}
+  .off{color:#d98b6a}
+  .ok{color:var(--grey-dim)}
+  .foot{margin-top:.9rem;font-size:.76rem;color:var(--grey-dim);line-height:1.55}
+  kbd{font:inherit;font-size:.72rem;border:1px solid var(--line);border-radius:3px;padding:0 .25rem}
+  @media (max-width:860px){ #ed{grid-template-columns:1fr;height:auto} #edCanvasWrap{height:62vh} }
+</style>
+</head>
+<body>
+<div id="ed">
+  <div id="edCanvasWrap"><canvas id="edCanvas"></canvas></div>
+  <aside id="side">
+    <h1>Grid editor</h1>
+    <p class="lede">
+      Pick a region below, then click or drag on the blanket to repaint cells.
+      Counts update as you go. <a href="index.html">Back to the blanket</a>.
+    </p>
+    <div class="tools">
+      <button id="undo" type="button" disabled>Undo</button>
+      <button id="revert" type="button" disabled>Revert all</button>
+      <button id="download" type="button">Download blanket.json</button>
+    </div>
+    <table>
+      <thead>
+        <tr><th>Region</th><th class="n">Now</th><th class="n">Est.</th><th class="n">Diff</th></tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+    <p class="foot" id="foot"></p>
+  </aside>
+</div>
+<script type="module" src="js/editor.js"></script>
+</body>
+</html>

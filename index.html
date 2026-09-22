@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nonna's blanket</title>
+<meta name="description" content="Progress tracker for Nonna's hexagon blanket of Italy.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&family=Unbounded:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<main id="stage">
+  <canvas id="blanket" aria-label="Nonna's blanket, hexagon by hexagon"></canvas>
+  <img id="photo" alt="" hidden>
+  <div id="tooltip" role="status" aria-live="polite" hidden></div>
+</main>
+
+<!-- overview card -->
+<section id="card" tabindex="0" role="button" aria-expanded="false"
+         aria-label="Progress overview. Activate for pace detail.">
+  <div class="card-main">
+    <div id="pct" class="pct">—</div>
+    <div id="sewn" class="sub">—</div>
+    <dl class="rows">
+      <div><dt>Hexagons left</dt><dd id="left">—</dd></div>
+      <div><dt>Time left</dt><dd id="countdown" class="tabular">—</dd></div>
+    </dl>
+    <p id="finish" class="finish">—</p>
+  </div>
+  <div class="card-more" id="more" hidden>
+    <dl class="rows">
+      <div><dt>Actual pace</dt><dd id="paceActual">—</dd></div>
+      <div><dt>Target pace</dt><dd id="paceTarget">—</dd></div>
+      <div><dt>Needed to hit the deadline</dt><dd id="paceNeeded">—</dd></div>
+      <div><dt>Started</dt><dd id="startOut">—</dd></div>
+      <div><dt>Deadline</dt><dd id="deadlineOut">—</dd></div>
+    </dl>
+    <p class="note" id="assumptions"></p>
+  </div>
+  <div class="card-hint" id="cardHint">Pace detail</div>
+</section>
+
+<!-- controls -->
+<div id="controls">
+  <button id="togglePhoto" type="button">Show photo</button>
+  <button id="latest" type="button">Latest</button>
+</div>
+
+<!-- photo strip -->
+<footer id="strip" aria-label="Dated photos of the blanket, oldest first">
+  <div id="stripInner" role="tablist"></div>
+</footer>
+
+<p id="loadError" hidden></p>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

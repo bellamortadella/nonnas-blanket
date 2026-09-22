@@ -1,0 +1,261 @@
+{
+  "note": "Estimates read from the 20 Sep 2026 photo (hexagon lattice fitting plus area/hex-size). Ranges show disagreement between methods; verify against Nonna's pattern.",
+  "grid": {
+    "across": 90,
+    "down": 72,
+    "total": 6480
+  },
+  "hexes_left": 930,
+  "regions": [
+    {
+      "region": "Sicily",
+      "estimate": 61,
+      "low": 60,
+      "high": 61,
+      "colour": "#cc4937",
+      "methods": {
+        "seam_fit": 61,
+        "area": 60.6,
+        "boundary_fit": 61
+      }
+    },
+    {
+      "region": "Sardinia",
+      "estimate": 41,
+      "low": 41,
+      "high": 42,
+      "colour": "#7daa67",
+      "methods": {
+        "seam_fit": 41,
+        "area": 41.8,
+        "boundary_fit": 41
+      }
+    },
+    {
+      "region": "Tuscany",
+      "estimate": 38,
+      "low": 35,
+      "high": 39,
+      "colour": "#f1c350",
+      "methods": {
+        "seam_fit": 38,
+        "area": 38.1,
+        "boundary_fit": 39
+      }
+    },
+    {
+      "region": "Puglia",
+      "estimate": 33,
+      "low": 30,
+      "high": 34,
+      "colour": "#98bbb6",
+      "methods": {
+        "seam_fit": 30,
+        "area": 32.8,
+        "boundary_fit": 34
+      }
+    },
+    {
+      "region": "Piedmont",
+      "estimate": 32,
+      "low": 30,
+      "high": 33,
+      "colour": "#dc963e",
+      "methods": {
+        "seam_fit": 30,
+        "area": 32.1,
+        "boundary_fit": 32
+      }
+    },
+    {
+      "region": "Lombardy",
+      "estimate": 31,
+      "low": 30,
+      "high": 32,
+      "colour": "#652a19",
+      "methods": {
+        "seam_fit": 30,
+        "area": 31.1,
+        "boundary_fit": 31
+      }
+    },
+    {
+      "region": "Calabria",
+      "estimate": 30,
+      "low": 28,
+      "high": 31,
+      "colour": "#e39e88",
+      "methods": {
+        "seam_fit": 31,
+        "area": 29.2,
+        "boundary_fit": 30
+      }
+    },
+    {
+      "region": "Emilia-Romagna",
+      "estimate": 27,
+      "low": 27,
+      "high": 29,
+      "colour": "#616537",
+      "methods": {
+        "seam_fit": 27,
+        "area": 27.1,
+        "boundary_fit": 29
+      }
+    },
+    {
+      "region": "Lazio",
+      "estimate": 25,
+      "low": 24,
+      "high": 27,
+      "colour": "#707f9d",
+      "methods": {
+        "seam_fit": 27,
+        "area": 25.4,
+        "boundary_fit": 24
+      }
+    },
+    {
+      "region": "Campania",
+      "estimate": 24,
+      "low": 23,
+      "high": 26,
+      "colour": "#e3824a",
+      "methods": {
+        "seam_fit": 23,
+        "area": 25.2,
+        "boundary_fit": 24
+      }
+    },
+    {
+      "region": "Veneto",
+      "estimate": 19,
+      "low": 17,
+      "high": 19,
+      "colour": "#5b384a",
+      "methods": {
+        "seam_fit": 19,
+        "area": 18.1,
+        "boundary_fit": 19
+      }
+    },
+    {
+      "region": "Abruzzo",
+      "estimate": 18,
+      "low": 16,
+      "high": 19,
+      "colour": "#bdc16a",
+      "methods": {
+        "seam_fit": 17,
+        "area": 18.6,
+        "boundary_fit": 18
+      }
+    },
+    {
+      "region": "Basilicata",
+      "estimate": 16,
+      "low": 15,
+      "high": 17,
+      "colour": "#c4a780",
+      "methods": {
+        "seam_fit": 16,
+        "area": 16.1,
+        "boundary_fit": 17
+      }
+    },
+    {
+      "region": "Umbria",
+      "estimate": 15,
+      "low": 13,
+      "high": 15,
+      "colour": "#e9d1b1",
+      "methods": {
+        "seam_fit": 15,
+        "area": 13.8,
+        "boundary_fit": 15
+      }
+    },
+    {
+      "region": "Trentino-Alto Adige",
+      "estimate": 13,
+      "low": 12,
+      "high": 14,
+      "colour": "#9a7e31",
+      "methods": {
+        "seam_fit": 12,
+        "area": 13.5,
+        "boundary_fit": 13
+      }
+    },
+    {
+      "region": "Marche",
+      "estimate": 13,
+      "low": 13,
+      "high": 15,
+      "colour": "#cfa56c",
+      "methods": {
+        "seam_fit": 13,
+        "area": 14.1,
+        "boundary_fit": 13
+      }
+    },
+    {
+      "region": "Friuli-Venezia Giulia",
+      "estimate": 9,
+      "low": 8,
+      "high": 10,
+      "colour": "#cc9d79",
+      "methods": {
+        "seam_fit": 10,
+        "area": 8.8,
+        "boundary_fit": 8
+      }
+    },
+    {
+      "region": "Liguria",
+      "estimate": 8,
+      "low": 7,
+      "high": 9,
+      "colour": "#dacba3",
+      "methods": {
+        "seam_fit": 7,
+        "area": 8.4,
+        "boundary_fit": 9
+      }
+    },
+    {
+      "region": "Molise",
+      "estimate": 6,
+      "low": 5,
+      "high": 8,
+      "colour": "#ba8088",
+      "methods": {
+        "seam_fit": 6,
+        "area": 7.4,
+        "boundary_fit": 6
+      }
+    },
+    {
+      "region": "Aosta Valley",
+      "estimate": 5,
+      "low": 5,
+      "high": 6,
+      "colour": "#9a5b2a",
+      "methods": {
+        "seam_fit": 6,
+        "area": 5.3,
+        "boundary_fit": 5
+      }
+    }
+  ],
+  "region_total": {
+    "estimate": 464,
+    "low": 439,
+    "high": 486
+  },
+  "ocean": {
+    "total": 6016,
+    "sewn_so_far": 5086,
+    "left": 930
+  }
+}

@@ -1,0 +1,11 @@
+# macOS
+.DS_Store
+
+# node
+node_modules/
+
+# python scratch for the grid fitting scripts
+venv/
+__pycache__/
+*.pyc
+*.npy
