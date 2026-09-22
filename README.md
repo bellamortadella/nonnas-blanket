@@ -113,13 +113,14 @@ It is all in the `config` block at the top of `data/blanket.json`:
 |---|---|---|
 | `grid` | 72 cols × 90 rows | **no** — the photo suggests portrait, the brief says 90 × 72 |
 | `total` | 6480 | from the brief |
-| `startDate` | 2025-05-27 | **no** — date of the earliest photo in the archive |
-| `deadline` | 2027-01-01 | **no** — assumed from "the 18 months end in January 2027" |
+| `startDate` | 2025-06-07 | yes — confirmed by Jordan |
+| `deadline` | 2026-12-07 | yes — confirmed by Jordan |
 | `targetPerWeek` | 88 | from the brief |
 | `patch` | 10 rows high; 6 across left, 8 across right | widths match the photo's 3:4 ratio |
 
-`startDateConfirmed` and `deadlineConfirmed` are both `false`, so the card marks
-those two with an asterisk. Set them to `true` once you know.
+`startDateConfirmed` and `deadlineConfirmed` are both `true`, so the card shows
+those dates plainly. Set either to `false` and it gets an asterisk and a note
+that it is an assumption.
 
 The missing sections are `missing.left` and `missing.right`: column range, row
 range, and an `order` array giving the sewing sequence. Region counts are

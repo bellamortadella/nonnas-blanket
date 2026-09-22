@@ -66,11 +66,11 @@ not an exact count" in every region tooltip, and keeps your figure alongside as
 
 ### One piece of support for the current numbers
 
-With the start at 27 May 2025, her pace to 13 Sep 2026 works out at **89
-hexagons a week against a target of 88**, and 6,480 hexagons at 88 a week is
-73.6 weeks — almost exactly the 18 months the target was set from. She is 67.7
-weeks in and about 93% done, which is what an 18-month plan for 6,480 looks
-like.
+With the confirmed start of 7 June 2025, her pace to 13 Sep 2026 works out at
+**91 hexagons a week against a target of 88**, and 6,480 hexagons at 88 a week
+is 73.6 weeks — which is the eighteen months from 7 June 2025 to 7 December
+2026, almost to the day. She is 66 weeks in and about 93% done, which is what an
+eighteen-month plan for 6,480 looks like.
 
 That is consistent rather than conclusive — the 88 was probably derived from
 6,480 in the first place, so part of it is circular. But the elapsed time is
@@ -233,11 +233,12 @@ would need splitting by date. Worth a glance next time you see it.
   the blanket edge. The tooltip says "layout inferred from counts", as asked.
   Change the `order` arrays in `data/blanket.json` if she works the other way —
   nothing else depends on it.
-- **The start date now comes from the archive** (your question 1). The twenty
-  photos you added run from **27 May 2025**, which is `startDate` in the config —
-  earlier than the "around July 2025" in the brief. It is still marked
-  unconfirmed, and the card prints an asterisk against it. `deadline` is still
-  the assumed 1 Jan 2027, from "the 18 months end in January 2027".
+- **Question 1 is answered.** Jordan confirmed the real dates: started
+  **7 June 2025**, deadline **7 December 2026** — exactly eighteen months, which
+  is what the brief said the target was set from. Both are marked confirmed in
+  the config, so the card no longer asterisks them. Note the first two photos,
+  27 May and 2 June 2025, predate the start: she was making pieces before the
+  clock officially began.
 - **13 Sep to 20 Sep** (your question 5): no count, so 20 Sep is a photo-only
   stage. The card says so and carries the blanket forward from 13 Sep.
 - **Question 6** — yes, digital blanket as the main view with the photo one click
