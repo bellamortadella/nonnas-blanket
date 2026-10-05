@@ -328,6 +328,7 @@ const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>'
 function renderCard() {
   const stage = stages[idx];
   const traced = state.basis === 'traced';
+  const measured = state.basis === 'measured';
   if (!state.known) {
     el.pct.textContent = '—';
     el.sewn.textContent = 'No count for this date';
@@ -345,6 +346,9 @@ function renderCard() {
     const p = pace(data, stage, stats);
     el.finish.innerHTML = traced
       ? `Traced by eye from the photo — approximate, not a measured count.`
+      : measured && stats.left > 0
+      ? `Counted off the photo: <b>${nf.format(stats.left)}</b> left, all in the top-right corner. ` +
+        `At her pace that is days, not weeks.`
       : stats.left === 0
         ? `<b>Finished.</b>`
         : `At her pace so far she finishes about <b>${fmtDate(p.projected)}</b> — ${aheadText(p.aheadWeeks)}.`;

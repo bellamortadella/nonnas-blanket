@@ -89,6 +89,14 @@ export function stateAt(data, stage, stages = data.stages) {
   const { cols, rows } = data.config.grid;
   const sewn = new Uint8Array(cols * rows).fill(1);
 
+  // A measured stage lists the cells that were still bare, read off the photo.
+  if (stage.unsewn) {
+    const loose = new Uint8Array(cols * rows);
+    for (const i of stage.unsewn) sewn[i] = 0;
+    return { sewn, loose: null, known: true, basis: 'measured',
+             sewnLeft: null, sewnRight: null, carriedFrom: null };
+  }
+
   // A traced stage carries its own state, read by eye off that day's photo.
   if (stage.trace) {
     const t = stage.trace;

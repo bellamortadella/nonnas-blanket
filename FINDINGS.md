@@ -118,6 +118,18 @@ aspect measurement, so if you can tell me how many hexagons run along the
 blanket's short edge, that closes it. Say 90 × 72 and I will refit rather than
 transpose — the map would need re-deriving, not rotating.
 
+## Where it stands on 5 Oct 2026
+
+Counted off the newest photo the same way as 13 Sep: **27 hexagons left**, a
+single block at the top-right, rows 0–7 across columns 68–71. That is **99.6%**.
+Three isolated single cells also read as bare; they are one-cell specks where a
+cell centre falls just outside the segmented edge, so they were dropped as noise.
+
+Both corner blocks from 13 Sep are gone. That is **449 hexagons in 22 days,
+about 143 a week** against her long-run average of 91 — a real push toward the
+finish. At that rate the last 27 are a couple of days' work, and the deadline is
+7 December.
+
 ## The missing sections
 
 Read off the 13 Sep photo at my grid's scale:
@@ -141,15 +153,27 @@ Two things that are not just scale, though:
   each side. The 3.4 being identical on both sides looks real; its not being a
   whole number does not. Worth checking how tall the blocks actually are.
 
-## The loose patch, and where row 0 sits
+## The loose patch — it moves, so it is not sewn on
 
-I put row 0 on the top edge of the main blanket. **The finished patch lying above
-that edge in the 13 Sep photo is outside my grid entirely** — roughly 9 columns
-by 7 rows, unaccounted for.
+Two photos now show a finished patch sitting above the blanket's top edge, and
+**it is in a different place in each**. On 13 Sep it was at roughly columns
+31–41; on 5 Oct it is at columns 0–10. A patch sewn into the blanket cannot
+move, so it is loose.
 
-If that patch is to join on and the blanket grows taller, my top edge is not row
-0, and both the total and the missing counts move. This is your question 3 and it
-is still open.
+Measured against the grid on 5 Oct it is about **10 columns by 14 rows**, call it
+140 hexagons of area — and only 27 hexagons of the blanket remain unsewn. It
+will not fit in the gap that is left.
+
+So one of these is true, and I cannot tell which from the photos:
+
+- the blanket is meant to be **taller than 90 rows**, and that patch joins across
+  the top, in which case the total is above 6,480 and my row 0 is not the top; or
+- it is **spare** — left over, or meant for a border, a backing, a label, or
+  another project entirely.
+
+This is your question 3, now a good deal sharper. **If you can tell me what that
+patch is for, I can close it.** Until then the grid stays 72 × 90 and the patch
+is not counted.
 
 ## The photo archive
 
