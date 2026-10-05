@@ -1,5 +1,5 @@
 import {
-  loadData, Layout, hexPath, stateAt, tally, sectionStats, pace,
+  loadData, Layout, hexPath, stateAt, tally, pace,
   nf, pctFmt, fmtDate, fmtDateShort, countdown, aheadText, OCEAN
 } from './blanket.js';
 
@@ -20,7 +20,6 @@ const GLOW_MS = 130;           // the one animation on the page
 
 let data, regionById, stages, idx = 0, spansYears = false;
 let state, stats, layout, base, glowLayer = null, glowKey = null, glowColour = '#fff';
-let sectionOf = new Map();     // cell index -> 'left' | 'right'
 let glowHalo = 1;              // big regions need a lighter touch than small ones
 let glowT = 0, glowRAF = 0, showPhoto = false;
 
@@ -36,9 +35,6 @@ loadData().then(start).catch((e) => {
 function start(d) {
   data = d;
   regionById = new Map(d.regions.map((r) => [r.id, r]));
-  for (const side of Object.keys(d.missing)) {
-    for (const i of d.missing[side].order) sectionOf.set(i, side);
-  }
   stages = [...d.stages].sort((a, b) =>
     (a.date + (a.photo ?? '')).localeCompare(b.date + (b.photo ?? '')));
   spansYears = new Set(stages.map((s) => s.date.slice(0, 4))).size > 1;
@@ -176,10 +172,14 @@ function buildGlow(target) {
     glowHalo = big ? 0.35 : 1;
     glowColour = brighten(colour, big ? 0.13 : 0.18);
     g.fillStyle = glowColour;
+    g.strokeStyle = glowColour;
+    g.lineWidth = Math.max(0.9, R * 0.13);
     for (let i = 0; i < data.cells.length; i++) {
-      if (data.cells[i] !== target.id || !state.sewn[i]) continue;
-      hexPath(g, layout.cx(i % cols), layout.cy(i % cols, (i / cols) | 0), R * 0.97);
-      g.fill();
+      if (data.cells[i] !== target.id) continue;
+      if (state.loose?.[i]) continue;
+      const cx = layout.cx(i % cols), cy = layout.cy(i % cols, (i / cols) | 0);
+      if (state.sewn[i]) { hexPath(g, cx, cy, R * 0.97); g.fill(); }
+      else { hexPath(g, cx, cy, R * 0.84); g.stroke(); }   // still to sew
     }
   } else {
     // a missing section: light every outline in it, in brightened ocean navy
@@ -252,11 +252,10 @@ function targetAt(x, y) {
   if (!c) return null;
   const { cols } = data.config.grid;
   const i = c.row * cols + c.col;
-  if (state.sewn[i]) return { kind: 'region', id: data.cells[i], key: `r${data.cells[i]}` };
   if (state.loose?.[i]) return { kind: 'loose', id: data.cells[i], key: `l${data.cells[i]}` };
-  const side = sectionOf.get(i);
-  if (side && (state.basis === 'own' || state.basis === 'measured')) return { kind: 'section', side, key: `s${side}` };
-  return { kind: 'future', id: data.cells[i], key: `f${data.cells[i]}` };
+  // sewn or not, a cell belongs to one region - the bare band along the top is
+  // ocean, so it lights with the rest of the ocean rather than on its own
+  return { kind: 'region', id: data.cells[i], key: `r${data.cells[i]}` };
 }
 
 function setHover(t, px, py) {
@@ -281,16 +280,14 @@ function placeTip(x, y) {
 }
 
 function tipHTML(t) {
-  if (t.kind === 'loose' || t.kind === 'future') {
+  if (t.kind === 'loose') {
     const isOcean = t.id === OCEAN;
     const name = isOcean ? data.config.oceanName : regionById.get(t.id).name;
     const colour = isOcean ? data.config.oceanColour : regionById.get(t.id).colour;
     const e = stats.perRegion.get(t.id) ?? { total: 0, sewn: 0 };
     return `
       <span class="tt-name"><i class="tt-swatch" style="background:${colour}"></i>${esc(name)}</span>
-      ${t.kind === 'loose'
-        ? 'Finished as a loose piece — not joined on yet.'
-        : `Not sewn yet on this date.${isOcean ? '' : ` ${nf.format(e.sewn)} of ${nf.format(e.total)} of it was in place.`}`}
+      Finished as a loose piece — not joined on yet.
       <br><span class="tt-est">this is where it goes on the finished blanket</span>`;
   }
   if (t.kind === 'region') {
@@ -300,25 +297,15 @@ function tipHTML(t) {
     const colour = isOcean ? data.config.oceanColour : regionById.get(t.id).colour;
     const share = e.total / stats.total;
     const done = e.total ? e.sewn / e.total : 1;
-    const prior = !isOcean ? regionById.get(t.id).priorEstimate : null;
     return `
       <span class="tt-name"><i class="tt-swatch" style="background:${colour}"></i>${esc(name)}</span>
       ${nf.format(e.total)} hexagons · ${pctFmt(share)} of the blanket<br>
       ${nf.format(e.sewn)} of ${nf.format(e.total)} sewn, ${pctFmt(done)}
+      ${e.total - e.sewn > 0 ? `<br>${nf.format(e.total - e.sewn)} still to sew` : ''}
       ${isOcean
         ? `<br><span class="tt-est">6,480 less the 907 of the map</span>`
         : `<br><span class="tt-est">Nonna's own count · the shape is fitted from the photos</span>`}`;
   }
-  const s = sectionStats(data, state, t.side);
-  const patches = s.patchesLeft;
-  const pTxt = Number.isInteger(patches) ? nf.format(patches)
-    : patches.toFixed(1).replace(/\.0$/, '');
-  return `
-    <span class="tt-name"><i class="tt-swatch" style="background:${data.config.oceanColour}"></i>${esc(s.label)}</span>
-    ${nf.format(s.left)} hexagons still to sew<br>
-    ${pTxt} ${patches === 1 ? 'patch' : 'patches'} at ${s.perPatch} a patch<br>
-    ${nf.format(s.sewn)} of ${nf.format(s.total)} sewn in this section
-    <br><span class="tt-est">layout inferred from counts</span>`;
 }
 
 const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

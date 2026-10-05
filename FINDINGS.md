@@ -134,20 +134,28 @@ percentage was overstated:
 
 | | before | corrected |
 |---|---:|---:|
-| 13 Sep 2026 | 92.7% | **81.3%** |
-| 5 Oct 2026 | 99.6% | **88.1%** |
-| left to sew | 27 | **773** |
-| pace needed | 3 a week | **86 a week** |
-| projection | 6.9 weeks early | **0.4 weeks late** |
+| 13 Sep 2026 | 92.7% | **83.2%** |
+| 5 Oct 2026 | 99.6% | **89.2%** |
+| left to sew | 27 | **698** |
+| pace needed | 3 a week | **78 a week** |
+| projection | 6.9 weeks early | **0.6 weeks early** |
 
-She is not nearly finished — she is 88% done with a band along the top to go,
-and at her long-run 82 a week that lands a few days past 7 December.
+She is not nearly finished — she is 89% done with a band along the top to go.
+Jordan's figures set it exactly: the top-left square is 11 across, so the bare
+rectangle beside it is **61 across by 11 high = 671**, plus the **27** at its
+bottom-right corner. **698 in all**, and at her long-run 83 a week that lands
+2 December, just inside the deadline.
 
-**Calabria was also wrong.** It bordered only ocean and Sicily — floating off
-the toe instead of joined to the mainland. One ocean cell at the Strait became
-Basilicata to bridge it, and one Basilicata cell elsewhere went back to ocean so
-her count of 24 still holds. Every region is now a single piece and the mainland
-is one landmass.
+**That band is ocean, not a separate thing.** Hovering it now lights the whole
+ocean — sewn hexagons filled, the bare band outlined — under one tooltip, rather
+than treating the remaining work as its own region.
+
+**Calabria was also wrong**, twice over. It bordered only ocean and Sicily —
+floating off the toe, joined to nothing. Jordan's close-up settles the real
+arrangement: Calabria touches **Basilicata and nothing else**, with **one
+hexagon of ocean** between it and Sicily. That is now exactly what the grid
+says — Calabria borders Basilicata over two cells, the Strait of Messina is one
+hexagon wide, counts are untouched and every region is a single piece.
 
 ## Where it stands on 5 Oct 2026
 
