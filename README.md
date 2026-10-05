@@ -125,8 +125,9 @@ It is all in the `config` block at the top of `data/blanket.json`:
 those dates plainly. Set either to `false` and it gets an asterisk and a note
 that it is an assumption.
 
-The missing sections are `missing.left` and `missing.right`: column range, row
-range, and an `order` array giving the sewing sequence. Region counts are
+`missing` holds whatever sections are still to sew — currently a single
+`missing.top`, the band 61 wide by 11 high along the top — each with a column
+range, row range and an `order` array giving the sewing sequence. Region counts are
 derived from `cells`, never stored twice.
 
 ## Data model

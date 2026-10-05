@@ -158,9 +158,13 @@ export function stateAt(data, stage, stages = data.stages) {
     .at(-1) ?? null;
   const L = src?.sewnLeft ?? 0;
   const Rt = src?.sewnRight ?? 0;
-  for (const [side, done] of [['left', L], ['right', Rt]]) {
+  // Older stages counted two corner sections; the data now carries whatever
+  // sections exist, so walk them rather than assuming left and right.
+  const sides = Object.keys(data.missing);
+  const doneFor = (side) => (side === 'right' ? Rt : L);
+  for (const side of sides) {
     const sec = data.missing[side];
-    for (let i = done; i < sec.order.length; i++) sewn[sec.order[i]] = 0;
+    for (let i = doneFor(side); i < sec.order.length; i++) sewn[sec.order[i]] = 0;
   }
   const basis = known ? 'own' : (src ? 'carried' : 'none');
   return { sewn, loose: null, known, basis, sewnLeft: L, sewnRight: Rt,
@@ -190,8 +194,10 @@ export function tally(data, state) {
 /** Remaining hexagons in one missing section at this stage. */
 export function sectionStats(data, state, side) {
   const sec = data.missing[side];
-  const done = side === 'left' ? state.sewnLeft : state.sewnRight;
   const total = sec.order.length;
+  const done = state.sewn
+    ? sec.order.filter((i) => state.sewn[i]).length
+    : (side === 'right' ? state.sewnRight : state.sewnLeft) ?? 0;
   return {
     side, label: sec.label, total,
     sewn: done, left: total - done,

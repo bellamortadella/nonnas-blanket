@@ -36,7 +36,7 @@ loadData().then(start).catch((e) => {
 function start(d) {
   data = d;
   regionById = new Map(d.regions.map((r) => [r.id, r]));
-  for (const side of ['left', 'right']) {
+  for (const side of Object.keys(d.missing)) {
     for (const i of d.missing[side].order) sectionOf.set(i, side);
   }
   stages = [...d.stages].sort((a, b) =>
@@ -255,7 +255,7 @@ function targetAt(x, y) {
   if (state.sewn[i]) return { kind: 'region', id: data.cells[i], key: `r${data.cells[i]}` };
   if (state.loose?.[i]) return { kind: 'loose', id: data.cells[i], key: `l${data.cells[i]}` };
   const side = sectionOf.get(i);
-  if (side && state.basis === 'own') return { kind: 'section', side, key: `s${side}` };
+  if (side && (state.basis === 'own' || state.basis === 'measured')) return { kind: 'section', side, key: `s${side}` };
   return { kind: 'future', id: data.cells[i], key: `f${data.cells[i]}` };
 }
 
@@ -347,8 +347,7 @@ function renderCard() {
     el.finish.innerHTML = traced
       ? `Traced by eye from the photo — approximate, not a measured count.`
       : measured && stats.left > 0
-      ? `Counted off the photo: <b>${nf.format(stats.left)}</b> left, all in the top-right corner. ` +
-        `At her pace that is days, not weeks.`
+      ? `Counted off the photo — <b>${nf.format(stats.left)}</b> left, the band along the top.`
       : stats.left === 0
         ? `<b>Finished.</b>`
         : `At her pace so far she finishes about <b>${fmtDate(p.projected)}</b> — ${aheadText(p.aheadWeeks)}.`;

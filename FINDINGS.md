@@ -118,17 +118,46 @@ aspect measurement, so if you can tell me how many hexagons run along the
 blanket's short edge, that closes it. Say 90 × 72 and I will refit rather than
 transpose — the map would need re-deriving, not rotating.
 
+## The correction that changed everything (5 Oct 2026)
+
+Jordan: *"The very left shows the full height. And the bottom is the full width.
+There is still 61 or 11 high to go — that's the gap along the top."*
+
+That moved **row 0 up by 11 rows**. The strip at the top-left is not a loose
+patch, it is the top-left corner of the blanket, and above the main sewn edge
+there is a band 61 wide by 11 high still to go. His two numbers also settle the
+width: **61 + 11 = 72 columns**, which is the brief's figure.
+
+Everything I had before was measured against a grid that stopped at the sewn
+top edge, so it counted a blanket that was 11 rows too short and every
+percentage was overstated:
+
+| | before | corrected |
+|---|---:|---:|
+| 13 Sep 2026 | 92.7% | **81.3%** |
+| 5 Oct 2026 | 99.6% | **88.1%** |
+| left to sew | 27 | **773** |
+| pace needed | 3 a week | **86 a week** |
+| projection | 6.9 weeks early | **0.4 weeks late** |
+
+She is not nearly finished — she is 88% done with a band along the top to go,
+and at her long-run 82 a week that lands a few days past 7 December.
+
+**Calabria was also wrong.** It bordered only ocean and Sicily — floating off
+the toe instead of joined to the mainland. One ocean cell at the Strait became
+Basilicata to bridge it, and one Basilicata cell elsewhere went back to ocean so
+her count of 24 still holds. Every region is now a single piece and the mainland
+is one landmass.
+
 ## Where it stands on 5 Oct 2026
 
-Counted off the newest photo the same way as 13 Sep: **27 hexagons left**, a
-single block at the top-right, rows 0–7 across columns 68–71. That is **99.6%**.
-Three isolated single cells also read as bare; they are one-cell specks where a
-cell centre falls just outside the segmented edge, so they were dropped as noise.
+Counted on the corrected grid: **773 hexagons left, 88.1% done**. Both corner
+blocks from 13 Sep are gone — that is 439 hexagons in 22 days, about 140 a week
+against her long-run 82. What remains is the band along the top.
 
-Both corner blocks from 13 Sep are gone. That is **449 hexagons in 22 days,
-about 143 a week** against her long-run average of 91 — a real push toward the
-finish. At that rate the last 27 are a couple of days' work, and the deadline is
-7 December.
+If she holds 140 a week the band takes about five and a half weeks, finishing
+mid-November with three weeks to spare. At her long-run 82 it is nine weeks,
+which lands just past the deadline. The next photo will show which.
 
 ## The missing sections
 
