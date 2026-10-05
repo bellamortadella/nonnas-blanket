@@ -146,16 +146,18 @@ rectangle beside it is **61 across by 11 high = 671**, plus the **27** at its
 bottom-right corner. **698 in all**, and at her long-run 83 a week that lands
 2 December, just inside the deadline.
 
-**That band is ocean, not a separate thing.** Hovering it now lights the whole
-ocean — sewn hexagons filled, the bare band outlined — under one tooltip, rather
-than treating the remaining work as its own region.
+**That band is ocean, not a separate thing.** Hovering it lights the whole ocean
+— sewn hexagons filled, the bare band outlined — under one tooltip, which splits
+the figure into **ocean complete** and **ocean incomplete** rather than treating
+the remaining work as its own region.
 
 **Calabria was also wrong**, twice over. It bordered only ocean and Sicily —
 floating off the toe, joined to nothing. Jordan's close-up settles the real
 arrangement: Calabria touches **Basilicata and nothing else**, with **one
 hexagon of ocean** between it and Sicily. That is now exactly what the grid
-says — Calabria borders Basilicata over two cells, the Strait of Messina is one
-hexagon wide, counts are untouched and every region is a single piece.
+says — **six touchpoints with Basilicata**, nothing else but ocean, and the
+Strait of Messina one hexagon wide. Counts untouched, every region a single
+piece.
 
 ## Where it stands on 5 Oct 2026
 

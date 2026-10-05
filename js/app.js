@@ -300,11 +300,13 @@ function tipHTML(t) {
     return `
       <span class="tt-name"><i class="tt-swatch" style="background:${colour}"></i>${esc(name)}</span>
       ${nf.format(e.total)} hexagons · ${pctFmt(share)} of the blanket<br>
-      ${nf.format(e.sewn)} of ${nf.format(e.total)} sewn, ${pctFmt(done)}
-      ${e.total - e.sewn > 0 ? `<br>${nf.format(e.total - e.sewn)} still to sew` : ''}
       ${isOcean
-        ? `<br><span class="tt-est">6,480 less the 907 of the map</span>`
-        : `<br><span class="tt-est">Nonna's own count · the shape is fitted from the photos</span>`}`;
+        ? `Ocean complete: ${nf.format(e.sewn)}, ${pctFmt(done)}<br>` +
+          `Ocean incomplete: ${nf.format(e.total - e.sewn)}` +
+          `<br><span class="tt-est">6,480 less the 907 of the map</span>`
+        : `${nf.format(e.sewn)} of ${nf.format(e.total)} sewn, ${pctFmt(done)}` +
+          (e.total - e.sewn > 0 ? `<br>${nf.format(e.total - e.sewn)} still to sew` : '') +
+          `<br><span class="tt-est">Nonna's own count · the shape is fitted from the photos</span>`}`;
   }
 }
 
