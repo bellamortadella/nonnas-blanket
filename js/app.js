@@ -305,8 +305,9 @@ function tipHTML(t) {
       <span class="tt-name"><i class="tt-swatch" style="background:${colour}"></i>${esc(name)}</span>
       ${nf.format(e.total)} hexagons · ${pctFmt(share)} of the blanket<br>
       ${nf.format(e.sewn)} of ${nf.format(e.total)} sewn, ${pctFmt(done)}
-      ${prior ? `<br><span class="tt-est">fitted from the photo, not an exact count · earlier estimate ${prior}</span>` : ''}
-      ${isOcean ? `<br><span class="tt-est">fitted from the photo, not an exact count</span>` : ''}`;
+      ${isOcean
+        ? `<br><span class="tt-est">6,480 less the 907 of the map</span>`
+        : `<br><span class="tt-est">Nonna's own count · the shape is fitted from the photos</span>`}`;
   }
   const s = sectionStats(data, state, t.side);
   const patches = s.patchesLeft;

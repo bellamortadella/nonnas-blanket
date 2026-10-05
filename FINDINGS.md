@@ -11,9 +11,11 @@ prior to check against rather than as truth.
 The fit is reproducible — `tools/fit-grid/` holds the scripts and the order to
 run them in.
 
-**The headline: I could not pin the hexagon size, and that is the one number
-everything else hangs off.** The app ships with my best fit, clearly labelled as
-an estimate, and every figure that depends on it lives in one config block.
+**The hexagon count is settled.** Nonna keeps her own tally sheet — every region
+with a fabric swatch pinned beside it and its hexagon count written underneath —
+and Jordan photographed it in October 2026. That resolves what the photos alone
+could not. The map is **907 hexagons**, so the ocean is **5,573** of the 6,480.
+Each region now carries her exact figure, and the cell map was rescaled to match.
 
 ---
 
@@ -33,60 +35,58 @@ an estimate, and every figure that depends on it lives in one config block.
   out to be, and it matches your 6-across and 8-across patches.
 - **Hexagons are flat-top**, as you thought — a neighbour sits directly above
   each one.
+- **Every region's hexagon count**, from Nonna's tally sheet.
 - **The blanket photographs taller than it is wide.** See the open question below.
 
-## What I could not settle: the hexagon size
+## The hexagon count, settled — question answered
 
-Three ways of counting Sardinia, which is the best target in the set because it
-is an island with a clean boundary and it sits fully inside one close-up:
+Nonna's tally, October 2026:
 
-| Method | Sardinia |
-|---|---:|
-| Your earlier estimate, from the 20 Sep close-up | 41 |
-| Counting hexagons by eye on the 20 Sep close-up | roughly 55 |
-| My lattice fit on the 13 Sep photo | 78 |
+| Region | Count | | Region | Count |
+|---|---:|---|---|---:|
+| Lombardy | 84 | | Abruzzo | 34 |
+| Tuscany | 82 | | Marche | 29 |
+| Piedmont | 81 | | Umbria | 27 |
+| Sardinia | 65 | | Basilicata | 24 |
+| Sicily | 65 | | Friuli-Venezia Giulia | 24 |
+| Emilia-Romagna | 64 | | Liguria | 20 |
+| Veneto | 62 | | Aosta Valley | 15 |
+| Puglia | 49 | | Molise | 12 |
+| Lazio | 47 | | | |
+| Calabria | 42 | | **Map total** | **907** |
+| Trentino-Alto Adige | 42 | | Ocean | 5,573 |
+| Campania | 39 | | **Blanket** | **6,480** |
 
-They do not converge, and neither do the automated approaches I tried — boundary
-scallop periods, 2-D FFT of the seams, and seam detection all gave answers
-scattered from 28 to 78 for the same region. The seams are genuinely faint, the
-batik print interferes with every frequency method, and the 13 Sep photo is too
-angled and too small to read cells from — exactly as your brief predicted.
+How the three attempts compare, now that there is an answer:
 
-**So treat every per-region count in `data/blanket.json` as an estimate that
-could be 30% out in either direction.** The map is somewhere around 600–1,100
-hexagons. My fit says 1,110, which is likely at the top of the plausible range;
-your table's 464 is likely at the bottom. The app says "fitted from the photo,
-not an exact count" in every region tooltip, and keeps your figure alongside as
-`priorEstimate`.
+| | Map total | Verdict |
+|---|---:|---|
+| Earlier estimate from the 20 Sep close-up | 464 | about half the truth |
+| My lattice fit on the 13 Sep photo | 1,110 | 22% high |
+| **Nonna's tally** | **907** | the answer |
 
-> An earlier draft of this file asserted that every region was 2.39× your
-> estimate and presented that as settled. It was not — that conclusion came from
-> the lattice fit alone, before the close-ups arrived, and the close-ups do not
-> support it. This version replaces it.
+So my fit was much closer than the old estimate, and sat inside the 600–1,100
+band I gave — near its top. The old table was not off by a little, it was off by
+nearly half.
 
-### One piece of support for the current numbers
+**This also confirms the 6,480 total independently.** Her 907 map hexagons are
+15.1% of the 6,004 sewn on 13 Sep 2026, and I measured the coloured map at 15.3%
+of the sewn blanket by area in that photo. Two unrelated methods, a fifth of a
+percent apart.
 
-With the confirmed start of 7 June 2025, her pace to 13 Sep 2026 works out at
-**91 hexagons a week against a target of 88**, and 6,480 hexagons at 88 a week
-is 73.6 weeks — which is the eighteen months from 7 June 2025 to 7 December
-2026, almost to the day. She is 66 weeks in and about 93% done, which is what an
-eighteen-month plan for 6,480 looks like.
+### What changed in the data
 
-That is consistent rather than conclusive — the 88 was probably derived from
-6,480 in the first place, so part of it is circular. But the elapsed time is
-independent, and it does not fit a blanket of only ~4,600 hexagons, which is
-what the low end of my measurements would imply. It nudges me toward the current
-figures being closer to right than wrong.
+The cell map was shrunk about its centroid by a linear factor of 0.904 — the
+square root of 907/1,110 — then balanced cell by cell until every region hit her
+count exactly, peeling the most ragged boundary cells first so the shapes stay
+compact and each region stays in one piece. Italy is slightly smaller than it
+was and still plainly Italy.
 
-### The one thing that would settle all of it
-
-**Count one edge.** The number of hexagons along the bottom edge of the blanket,
-or along one side, either counted off a photo or asked of Nonna, fixes the
-hexagon size exactly. Every region count, the ocean total and the remaining
-count all follow from it immediately, and I can regenerate the grid in minutes.
-
-Failing that, a flat top-down photo with all four corners in frame, as the brief
-anticipated.
+**What is exact now, and what is not.** The *counts* are Nonna's and exact. The
+*shape* — which particular cell belongs to which region — is still fitted from
+the photos, and the app says so in every region tooltip. If a boundary looks
+wrong, `editor.html` repaints cells and flags any region that drifts off her
+count.
 
 ## The open question: which way round is 72 × 90?
 
@@ -111,10 +111,12 @@ Two further points cut against my reading:
 - Measuring Sardinia on the close-up and scaling it up through my grid implies a
   blanket about 93 columns by 72 rows — which is 90 × 72, your numbers.
 
-**The app ships at 72 × 90** because that is the geometry the cell map was fitted
-at, and re-labelling 6,480 cells at a different aspect is not something to guess
-at. If you confirm 90 × 72, say so and I will refit rather than transpose — the
-map would need re-deriving, not rotating.
+**The app ships at 72 × 90**, and Nonna's tally now backs the 6,480 total from a
+direction that has nothing to do with my lattice fit — see above. The *total* is
+solid. Which way round the 72 and the 90 go is the part still resting on my
+aspect measurement, so if you can tell me how many hexagons run along the
+blanket's short edge, that closes it. Say 90 × 72 and I will refit rather than
+transpose — the map would need re-deriving, not rotating.
 
 ## The missing sections
 

@@ -4,9 +4,10 @@ A progress tracker for Nonna's hexagon blanket of Italy: 6,480 hexagons, 72
 across and 90 down, on navy batik ocean. Static HTML, CSS and JavaScript — no
 backend, no build step.
 
-**Read [FINDINGS.md](FINDINGS.md) first.** The hexagon size is not settled by any
-photo in the project, so every region count here is an estimate that could be 30%
-out. Counting the hexagons along one edge of the blanket would fix all of it.
+**Read [FINDINGS.md](FINDINGS.md) first.** Per-region hexagon counts come from
+Nonna's own tally sheet and are exact — 907 across the map, 5,573 of ocean. What
+stays approximate is the *shape*: which particular cell belongs to which region
+was fitted from the photos.
 
 ## Running it
 
@@ -23,8 +24,9 @@ Netlify, GitHub Pages, an S3 bucket. There is nothing to compile.
 ## Using it
 
 - **Hover or tap a hexagon.** Its whole region lights up, everything else drops
-  to a third, and a tooltip gives the region, its hexagon count, its share of
-  the blanket and how much of it is sewn. The ocean counts as one region.
+  to a third, and a tooltip gives the region, its hexagon count from Nonna's
+  tally, its share of the blanket and how much of it is sewn. The ocean counts
+  as one region.
 - **Hover an empty outline** and it tells you what goes there on the finished
   blanket, and how much of that region was in place on the date you are looking
   at. Pieces finished but not yet joined — Sardinia through October and
@@ -82,8 +84,8 @@ npm run add-stage -- --help
 ## Fixing the grid by hand
 
 Open <http://localhost:5173/editor.html>. Pick a region from the list, then
-click or drag across the blanket to repaint cells. Counts update live beside the
-earlier estimates, and anything more than 3 away is flagged. `Cmd/Ctrl-Z` undoes
+click or drag across the blanket to repaint cells. Counts update live beside
+Nonna's tally, and any region that drifts off her count is flagged. `Cmd/Ctrl-Z` undoes
 a stroke. **Download blanket.json** gives you a complete file to drop over
 `data/blanket.json`.
 
@@ -111,8 +113,9 @@ It is all in the `config` block at the top of `data/blanket.json`:
 
 | Key | Value | Confirmed? |
 |---|---|---|
-| `grid` | 72 cols × 90 rows | **no** — the photo suggests portrait, the brief says 90 × 72 |
-| `total` | 6480 | from the brief |
+| `grid` | 72 cols × 90 rows | total yes, orientation **no** — see FINDINGS |
+| `total` | 6480 | corroborated by Nonna's tally |
+| `mapTotal` / `oceanTotal` | 907 / 5573 | yes — Nonna's tally |
 | `startDate` | 2025-06-07 | yes — confirmed by Jordan |
 | `deadline` | 2026-12-07 | yes — confirmed by Jordan |
 | `targetPerWeek` | 88 | from the brief |

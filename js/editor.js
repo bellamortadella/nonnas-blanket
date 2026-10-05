@@ -8,7 +8,7 @@ const wrap = $('edCanvasWrap'), cv = $('edCanvas'), ctx = cv.getContext('2d');
 const tbody = $('tbody'), foot = $('foot');
 const btnUndo = $('undo'), btnRevert = $('revert'), btnDownload = $('download');
 
-const FLAG_AT = 3;               // the brief: flag anything more than 3 from the estimate
+const FLAG_AT = 0;               // counts come from Nonna's tally, so they must match exactly
 
 let data, original, cells, regionById, layout, state;
 let brush = OCEAN, undoStack = [], painting = false, strokeTouched = null;
@@ -87,9 +87,10 @@ function paintAt(x, y) {
 
 function buildTable() {
   tbody.textContent = '';
+  // `target` is Nonna's own count; the editor's job is to keep each region on it
   const rows = [
-    { id: OCEAN, name: data.config.oceanName, colour: data.config.oceanColour, priorEstimate: null },
-    ...data.regions
+    { id: OCEAN, name: data.config.oceanName, colour: data.config.oceanColour, target: null },
+    ...data.regions.map((r) => ({ ...r, target: r.count }))
   ];
   for (const r of rows) {
     const tr = document.createElement('tr');
@@ -97,7 +98,7 @@ function buildTable() {
     tr.innerHTML =
       `<td><i class="sw" style="background:${r.colour}"></i>${r.name}</td>` +
       `<td class="n" data-now></td>` +
-      `<td class="n">${r.priorEstimate ?? '—'}</td>` +
+      `<td class="n">${r.target ?? '—'}</td>` +
       `<td class="n" data-diff></td>`;
     tr.addEventListener('click', () => setBrush(r.id));
     tbody.append(tr);
@@ -120,7 +121,7 @@ function refreshCounts() {
     const n = counts.get(id) ?? 0;
     if (id !== OCEAN) mapTotal += n;
     tr.querySelector('[data-now]').textContent = nf.format(n);
-    const est = id === OCEAN ? null : regionById.get(id).priorEstimate;
+    const est = id === OCEAN ? null : regionById.get(id).count;
     const cell = tr.querySelector('[data-diff]');
     if (est == null) { cell.textContent = '—'; cell.className = 'n ok'; continue; }
     const d = n - est;
@@ -132,7 +133,7 @@ function refreshCounts() {
   foot.innerHTML =
     `Map ${nf.format(mapTotal)} hexagons, ocean ${nf.format(data.config.total - mapTotal)}, ` +
     `total ${nf.format(data.config.total)}.<br>` +
-    `<b>${flagged}</b> of ${data.regions.length} regions differ from the earlier estimate by more than ${FLAG_AT}.` +
+    `<b>${flagged}</b> of ${data.regions.length} regions are off Nonna's count.` +
     (edited ? `<br>${nf.format(edited)} cell${edited === 1 ? '' : 's'} edited — outlined in white.` : '') +
     `<br><br>Download writes a full <kbd>blanket.json</kbd>; drop it over <kbd>data/blanket.json</kbd> to keep it.`;
   btnUndo.disabled = undoStack.length === 0;
