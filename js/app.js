@@ -148,7 +148,18 @@ function buildGlow(target) {
   const { cols } = data.config.grid;
   const R = layout.R;
 
-  if (target.kind === 'loose' || target.kind === 'future') {
+  if (target.kind === 'ocean') {
+    glowHalo = target.done ? 0.35 : 1;
+    glowColour = brighten(data.config.oceanColour, target.done ? 0.13 : 0.62);
+    g.fillStyle = glowColour; g.strokeStyle = glowColour;
+    g.lineWidth = Math.max(0.9, R * 0.14);
+    for (let i = 0; i < data.cells.length; i++) {
+      if (data.cells[i] !== OCEAN || !!state.sewn[i] !== target.done) continue;
+      const cx = layout.cx(i % cols), cy = layout.cy(i % cols, (i / cols) | 0);
+      if (target.done) { hexPath(g, cx, cy, R * 0.97); g.fill(); }
+      else { hexPath(g, cx, cy, R * 0.84); g.stroke(); }
+    }
+  } else if (target.kind === 'loose') {
     const isOcean = target.id === OCEAN;
     const colour = isOcean ? data.config.oceanColour : regionById.get(target.id).colour;
     glowHalo = 1;
@@ -253,8 +264,11 @@ function targetAt(x, y) {
   const { cols } = data.config.grid;
   const i = c.row * cols + c.col;
   if (state.loose?.[i]) return { kind: 'loose', id: data.cells[i], key: `l${data.cells[i]}` };
-  // sewn or not, a cell belongs to one region - the bare band along the top is
-  // ocean, so it lights with the rest of the ocean rather than on its own
+  // the ocean reads as two: what she has sewn, and what is still to go
+  if (data.cells[i] === OCEAN) {
+    const done = !!state.sewn[i];
+    return { kind: 'ocean', done, key: done ? 'oc-done' : 'oc-todo' };
+  }
   return { kind: 'region', id: data.cells[i], key: `r${data.cells[i]}` };
 }
 
@@ -280,6 +294,19 @@ function placeTip(x, y) {
 }
 
 function tipHTML(t) {
+  if (t.kind === 'ocean') {
+    const e = stats.perRegion.get(OCEAN) ?? { total: 0, sewn: 0 };
+    const n = t.done ? e.sewn : e.total - e.sewn;
+    const sw = t.done ? data.config.oceanColour : brighten(data.config.oceanColour, 0.55);
+    return `
+      <span class="tt-name"><i class="tt-swatch" style="background:${sw}"></i>${
+        t.done ? 'Ocean complete' : 'Ocean incomplete'}</span>
+      ${nf.format(n)} hexagons · ${pctFmt(n / stats.total)} of the blanket<br>
+      ${pctFmt(n / e.total)} of the ocean's ${nf.format(e.total)}
+      <br><span class="tt-est">${t.done
+        ? 'navy batik already sewn in'
+        : 'the band along the top, still to sew'}</span>`;
+  }
   if (t.kind === 'loose') {
     const isOcean = t.id === OCEAN;
     const name = isOcean ? data.config.oceanName : regionById.get(t.id).name;
