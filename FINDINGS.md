@@ -38,6 +38,33 @@ Each region now carries her exact figure, and the cell map was rescaled to match
 - **Every region's hexagon count**, from Nonna's tally sheet.
 - **The blanket photographs taller than it is wide.** See the open question below.
 
+## The map, rebuilt 1:1 from the flat photo (10 Oct 2026)
+
+Jordan supplied what the brief asked for at the very start: a **flat, top-down
+photo with all four corners in frame**, plus zoom-ins on the north, the
+centre-south, Sardinia and Sicily. The whole cell map was rebuilt from it.
+
+The method finally worked cleanly because the photo is flat and evenly lit.
+Blanket segmented from the floor, four boundary lines fitted with the left edge
+at full height, homography onto the 72 × 90 lattice, then every cell classified
+against colours sampled from the twenty regions themselves rather than from an
+older photo's palette.
+
+**That landed 905 of Nonna's 907 before any balancing, with ten regions already
+exact** — Sicily, Sardinia, Piedmont, Lombardy, Calabria and Veneto spot on,
+Tuscany, Puglia and Lazio within one, Emilia-Romagna within two. Balancing to
+her counts then needed only a nudge, under every constraint at once: each region
+a single piece, the mainland one landmass, Calabria touching only Basilicata
+over six cells, one hexagon of ocean in the Strait of Messina.
+
+`reference/rebuilt-vs-photo.png` puts the result beside the photo.
+
+One thing that had been quietly wrong all along: **Lazio's lavender was being
+read as ocean.** Its blue hue and middling brightness fell inside my navy test,
+so the biggest region in central Italy kept collapsing into its neighbours. The
+ocean sits at V 0.24–0.36 and every map colour is above 0.6, so a plain
+brightness cut separates them and the problem disappeared.
+
 ## The hexagon count, settled — question answered
 
 Nonna's tally, October 2026:
