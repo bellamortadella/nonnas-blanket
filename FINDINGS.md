@@ -321,6 +321,31 @@ matches, so it is most likely daylight versus indoor light rather than two
 fabrics — but if she did change batik partway, the app's single ocean colour
 would need splitting by date. Worth a glance next time you see it.
 
+## Nonna's own account (12 Oct 2026) — question 4 answered
+
+She sent a voice note with the week's figures, and they close exactly:
+
+- **126 this week**: nine columns of eleven down the left side (99) plus the
+  27-hexagon gap on the right.
+- **583 left**: 53 columns of eleven along the top.
+- **She works in blocks of three columns by eleven**, one column up and the next
+  down, "because one can go up and one can go down and I don't make any
+  mistakes" — seventeen blocks of three and a last block of two, which is the 53.
+
+That answers question 4 of the brief, and better than the brief asked: not just
+the direction but the unit of work. The `order` array for the remaining band now
+follows her blocks rather than my assumed row-by-row fill.
+
+**Her arithmetic also corrected mine.** I had the band at 61 columns with a
+10-column strip beside it; her numbers only close at **62 and 10**. 62 × 11 + 27
+= 709 on 5 Oct, less her 126, is 583 — exactly the 53 × 11 she reports, and
+62 − 9 columns filled = 53. My own fit of the 5 Oct photo had said 62 and I
+deferred to the 61. It is 62.
+
+This is the third time a fit of mine has run about one column tight against a
+real count. The photos are good to a column or so, and no better; where Nonna
+counts, her number wins.
+
 ## Smaller things
 
 - **Sewing order is assumed** (your question 4). Each section fills from its
