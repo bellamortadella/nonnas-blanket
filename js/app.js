@@ -360,10 +360,11 @@ function renderCard() {
     el.sewn.textContent = `${nf.format(stats.sewnTotal)} of ${nf.format(stats.total)} sewn`;
     el.left.textContent = nf.format(stats.left);
     const p = pace(data, stage, stats);
+    const mile = stage.milestone ? `<b>${esc(stage.milestone)}.</b> ` : '';
     el.finish.innerHTML = traced
       ? `Traced by eye from the photo — approximate, not a measured count.`
       : measured && stats.left > 0
-      ? `Counted off the photo — <b>${nf.format(stats.left)}</b> left, the band along the top.`
+      ? mile + `<b>${nf.format(stats.left)}</b> left, the band along the top.`
       : stats.left === 0
         ? `<b>Finished.</b>`
         : `At her pace so far she finishes about <b>${fmtDate(p.projected)}</b> — ${aheadText(p.aheadWeeks)}.`;
