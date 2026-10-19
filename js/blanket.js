@@ -218,11 +218,46 @@ export function pace(data, stage, t) {
   const weeksAtActual = actual > 0 ? t.left / actual : Infinity;
   const projected = new Date(asOf.getTime() + weeksAtActual * WEEK);
   const aheadWeeks = (deadline - projected) / WEEK;
+  // an optional stretch date, held in config beside the real deadline
+  let aspiration = null;
+  if (cfg.aspiration?.date) {
+    const by = new Date(cfg.aspiration.date + 'T00:00:00');
+    const weeks = (by - asOf) / WEEK;
+    aspiration = {
+      date: by, label: cfg.aspiration.label ?? 'Stretch', weeks,
+      needed: weeks > 0 ? t.left / weeks : Infinity,
+      passed: weeks <= 0
+    };
+  }
   return {
     start, deadline, asOf, actual, target: cfg.targetPerWeek,
-    needed, weeksToDeadline, projected, aheadWeeks,
+    needed, weeksToDeadline, projected, aheadWeeks, aspiration,
     weeksAtTarget: t.left / cfg.targetPerWeek
   };
+}
+
+/** Her pace over the step from the previous counted stage to this one. */
+export function recentPace(data, stages, stage) {
+  const counted = (s) => s.unsewn || (s.sewnLeft != null && s.sewnRight != null) || s.trace;
+  const ordered = [...stages].filter(counted).sort((a, b) => a.date.localeCompare(b.date));
+  const i = ordered.findIndex((s) => s === stage);
+  if (i < 1) return null;
+  // a single update can arrive as several photos on one date, so step back to
+  // the last stage from an earlier day rather than to the previous photo
+  let j = i - 1;
+  while (j >= 0 && ordered[j].date === stage.date) j--;
+  if (j < 0) return null;
+  const prev = ordered[j];
+  const days = (new Date(stage.date + 'T00:00:00') - new Date(prev.date + 'T00:00:00')) / 864e5;
+  if (days <= 0) return null;
+  const sewnOf = (s) => {
+    const st = stateAt(data, s, stages);
+    let n = 0;
+    for (let k = 0; k < st.sewn.length; k++) n += st.sewn[k];
+    return n;
+  };
+  const done = sewnOf(stage) - sewnOf(prev);
+  return { done, days, perWeek: done / (days / 7), from: prev.date };
 }
 
 /* ------------------------------------------------------------ formatting */

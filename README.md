@@ -34,7 +34,10 @@ Netlify, GitHub Pages, an S3 bucket. There is nothing to compile.
 - **Hover a dim outline** in a missing corner and the whole section lights up in
   brightened navy, with the hexagons and patches still to go.
 - **The card, top left,** carries the percentage, hexagons left, a live
-  countdown to the deadline and the projected finish. Click it for pace detail.
+  countdown to the deadline and the projected finish, and says whether the
+  stretch date is still in reach at her latest rate. Click it for pace detail:
+  long-run pace, latest week, the 88 target, and what each of the deadline and
+  the stretch would need.
 - **The strip along the bottom** holds a dated photo per visit. Click a
   thumbnail, or use ← and →, to move the whole screen to that date. **Latest**
   jumps to the newest. **Show photo** swaps the drawn blanket for the real one.
@@ -119,6 +122,7 @@ It is all in the `config` block at the top of `data/blanket.json`:
 | `startDate` | 2025-06-07 | yes — confirmed by Jordan |
 | `deadline` | 2026-12-07 | yes — confirmed by Jordan |
 | `targetPerWeek` | 88 | from the brief |
+| `aspiration` | 15 Nov 2026 | a stretch date, well inside the deadline |
 | `patch` | 10 rows high; 6 across left, 8 across right | widths match the photo's 3:4 ratio |
 
 `startDateConfirmed` and `deadlineConfirmed` are both `true`, so the card shows

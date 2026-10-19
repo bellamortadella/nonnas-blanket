@@ -1,6 +1,6 @@
 import {
-  loadData, Layout, hexPath, stateAt, tally, pace,
-  nf, pctFmt, fmtDate, fmtDateShort, countdown, aheadText, OCEAN
+  loadData, Layout, hexPath, stateAt, tally, pace, recentPace,
+  nf, pctFmt, fmtDate, fmtDateShort, countdown, aheadText, OCEAN, WEEK
 } from './blanket.js';
 
 const $ = (id) => document.getElementById(id);
@@ -9,6 +9,8 @@ const el = {
   card: $('card'), pct: $('pct'), sewn: $('sewn'), left: $('left'),
   countdown: $('countdown'), finish: $('finish'), more: $('more'),
   paceActual: $('paceActual'), paceTarget: $('paceTarget'), paceNeeded: $('paceNeeded'),
+  paceRecent: $('paceRecent'), paceAspire: $('paceAspire'),
+  aspireLabel: $('aspireLabel'), aspireOut: $('aspireOut'),
   startOut: $('startOut'), deadlineOut: $('deadlineOut'), assumptions: $('assumptions'),
   togglePhoto: $('togglePhoto'), latest: $('latest'),
   stripInner: $('stripInner'), err: $('loadError'), hint: $('cardHint')
@@ -355,6 +357,7 @@ function renderCard() {
       : `Photo only — <b>${fmtDateShort(stage.date, spansYears)}</b> is before the first counted date, so the ` +
         `photo is the record for this one. There is no digital blanket to draw yet.`;
     el.paceActual.textContent = el.paceNeeded.textContent = '—';
+    el.paceRecent.textContent = el.paceAspire.textContent = '—';
   } else {
     el.pct.textContent = pctFmt(stats.sewnTotal / stats.total);
     el.sewn.textContent = `${nf.format(stats.sewnTotal)} of ${nf.format(stats.total)} sewn`;
@@ -364,12 +367,28 @@ function renderCard() {
     el.finish.innerHTML = traced
       ? `Traced by eye from the photo — approximate, not a measured count.`
       : measured && stats.left > 0
-      ? mile + `<b>${nf.format(stats.left)}</b> left, the band along the top.`
+      ? mile + `<b>${nf.format(stats.left)}</b> left, the band along the top.` + (() => {
+          const rec = recentPace(data, stages, stage);
+          if (!p.aspiration || p.aspiration.passed || !rec || rec.perWeek <= 0) return '';
+          const wk = stats.left / rec.perWeek;
+          const by = new Date(p.asOf.getTime() + wk * WEEK);
+          const made = by <= p.aspiration.date;
+          return `<br>At last week's ${nf.format(Math.round(rec.perWeek))} that is <b>${fmtDate(by)}</b> — ` +
+                 `${made ? 'inside' : 'past'} the ${fmtDateShort(data.config.aspiration.date, spansYears)} stretch.`;
+        })()
       : stats.left === 0
         ? `<b>Finished.</b>`
         : `At her pace so far she finishes about <b>${fmtDate(p.projected)}</b> — ${aheadText(p.aheadWeeks)}.`;
     el.paceActual.textContent = `${p.actual.toFixed(0)} a week`;
     el.paceNeeded.textContent = isFinite(p.needed) ? `${Math.max(0, p.needed).toFixed(0)} a week` : '—';
+    const rec = recentPace(data, stages, stage);
+    el.paceRecent.textContent = rec ? `${rec.perWeek.toFixed(0)} a week` : '—';
+    if (p.aspiration) {
+      el.aspireLabel.textContent = `Needed for ${fmtDateShort(data.config.aspiration.date, spansYears)}`;
+      el.paceAspire.textContent = p.aspiration.passed ? 'date passed'
+        : `${Math.max(0, p.aspiration.needed).toFixed(0)} a week`;
+      el.aspireOut.textContent = fmtDate(p.aspiration.date);
+    }
   }
   el.paceTarget.textContent = `${data.config.targetPerWeek} a week`;
   const cfg = data.config;
