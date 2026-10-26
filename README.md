@@ -98,6 +98,7 @@ a stroke. **Download blanket.json** gives you a complete file to drop over
 index.html          the blanket
 editor.html         click-a-cell grid editor
 css/style.css
+icons/              tab icon, 16 to 512px
 js/blanket.js       grid geometry, stage state, statistics
 js/app.js           the main view
 js/editor.js
