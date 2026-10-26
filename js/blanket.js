@@ -174,6 +174,10 @@ export function stateAt(data, stage, stages = data.stages) {
 /* ------------------------------------------------------------- statistics */
 
 export const WEEK = 7 * 24 * 3600 * 1000;
+/** Parse a YYYY-MM-DD as UTC midnight. Local parsing drifts by an hour across
+ *  a daylight-saving change, which turned a 7-day step into 7 days and 1 hour
+ *  and quietly knocked a hexagon off the weekly pace. */
+export const day = (iso) => new Date(iso + 'T00:00:00Z');
 const DAY = 24 * 3600 * 1000;
 
 export function tally(data, state) {
@@ -208,9 +212,9 @@ export function sectionStats(data, state, side) {
 
 export function pace(data, stage, t) {
   const cfg = data.config;
-  const start = new Date(cfg.startDate + 'T00:00:00');
-  const deadline = new Date(cfg.deadline + 'T00:00:00');
-  const asOf = new Date(stage.date + 'T00:00:00');
+  const start = day(cfg.startDate);
+  const deadline = day(cfg.deadline);
+  const asOf = day(stage.date);
   const weeksElapsed = Math.max((asOf - start) / WEEK, 1 / 7);
   const actual = t.sewnTotal / weeksElapsed;
   const weeksToDeadline = (deadline - asOf) / WEEK;
@@ -221,7 +225,7 @@ export function pace(data, stage, t) {
   // an optional stretch date, held in config beside the real deadline
   let aspiration = null;
   if (cfg.aspiration?.date) {
-    const by = new Date(cfg.aspiration.date + 'T00:00:00');
+    const by = day(cfg.aspiration.date);
     const weeks = (by - asOf) / WEEK;
     aspiration = {
       date: by, label: cfg.aspiration.label ?? 'Stretch', weeks,
@@ -248,7 +252,7 @@ export function recentPace(data, stages, stage) {
   while (j >= 0 && ordered[j].date === stage.date) j--;
   if (j < 0) return null;
   const prev = ordered[j];
-  const days = (new Date(stage.date + 'T00:00:00') - new Date(prev.date + 'T00:00:00')) / 864e5;
+  const days = (day(stage.date) - day(prev.date)) / 864e5;
   if (days <= 0) return null;
   const sewnOf = (s) => {
     const st = stateAt(data, s, stages);
@@ -266,7 +270,8 @@ export const nf = new Intl.NumberFormat('en-AU');
 export const pctFmt = (n) => `${(n * 100).toFixed(1)}%`;
 
 export function fmtDate(d) {
-  return d.toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' });
+  return d.toLocaleDateString('en-AU',
+    { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
 }
 const MON = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 /** "13 Sep", or "13 Sep 26" when the archive spans more than one year. */

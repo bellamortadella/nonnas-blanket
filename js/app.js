@@ -1,6 +1,6 @@
 import {
   loadData, Layout, hexPath, stateAt, tally, pace, recentPace,
-  nf, pctFmt, fmtDate, fmtDateShort, countdown, aheadText, OCEAN, WEEK
+  nf, pctFmt, fmtDate, fmtDateShort, countdown, aheadText, OCEAN, WEEK, day
 } from './blanket.js';
 
 const $ = (id) => document.getElementById(id);
@@ -392,8 +392,8 @@ function renderCard() {
   }
   el.paceTarget.textContent = `${data.config.targetPerWeek} a week`;
   const cfg = data.config;
-  el.startOut.textContent = fmtDate(new Date(cfg.startDate + 'T00:00:00')) + (cfg.startDateConfirmed ? '' : ' *');
-  el.deadlineOut.textContent = fmtDate(new Date(cfg.deadline + 'T00:00:00')) + (cfg.deadlineConfirmed ? '' : ' *');
+  el.startOut.textContent = fmtDate(day(cfg.startDate)) + (cfg.startDateConfirmed ? '' : ' *');
+  el.deadlineOut.textContent = fmtDate(day(cfg.deadline)) + (cfg.deadlineConfirmed ? '' : ' *');
   const unconfirmed = [];
   if (!cfg.startDateConfirmed) unconfirmed.push('start date');
   if (!cfg.deadlineConfirmed) unconfirmed.push('deadline');
@@ -405,7 +405,7 @@ function renderCard() {
 
 function tickCountdown() {
   if (!data) return;
-  el.countdown.textContent = countdown(new Date(data.config.deadline + 'T00:00:00').getTime());
+  el.countdown.textContent = countdown(day(data.config.deadline).getTime());
 }
 
 /* ------------------------------------------------------------- photo strip */
