@@ -131,7 +131,7 @@ those dates plainly. Set either to `false` and it gets an asterisk and a note
 that it is an assumption.
 
 `missing` holds whatever sections are still to sew — currently a single
-`missing.top`, the band 61 wide by 11 high along the top — each with a column
+`missing.top`, the last of the band along the top — each with a column
 range, row range and an `order` array giving the sewing sequence. Region counts are
 derived from `cells`, never stored twice.
 
